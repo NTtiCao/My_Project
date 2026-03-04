@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trà Vinh – Vùng Đất Giao Thoa Văn Hoá</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #8B4513;
+    --gold: #C9A84C;
+    --ivory: #F5F0E8;
+    --deep: #1A1208;
+    --khmer-red: #B5451B;
+    --sage: #6B7C5C;
+    --sand: #D4B896;
+    --copper: #A0522D;
+    --cream: #FAF6EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: 'Noto Serif', serif;
+    overflow-x: hidden;
+  }
+
+  /* === CUSTOM CURSOR === */
+  * { cursor: none !important; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--copper);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.18s ease, width 0.3s, height 0.3s;
+    transform: translate(-13px, -13px);
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(26,18,8,0.85), transparent);
+    backdrop-filter: blur(2px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--ivory);
+    text-decoration: none; opacity: 0.85;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  /* === HERO === */
+  .hero {
+    height: 100vh; position: relative;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 60px 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(160deg, rgba(139,69,19,0.45) 0%, rgba(26,18,8,0.85) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3CradialGradient id='r1' cx='30%25' cy='40%25'%3E%3Cstop offset='0%25' stop-color='%23C9A84C' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/radialGradient%3E%3CradialGradient id='r2' cx='70%25' cy='60%25'%3E%3Cstop offset='0%25' stop-color='%23B5451B' stop-opacity='0.2'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='%231A1208'/%3E%3Cellipse cx='240' cy='240' rx='320' ry='200' fill='url(%23r1)'/%3E%3Cellipse cx='560' cy='360' rx='280' ry='180' fill='url(%23r2)'/%3E%3C/svg%3E") center/cover;
+  }
+
+  /* Decorative Khmer-pattern overlay */
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 4 L76 40 L40 76 L4 40 Z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3Cpath d='M40 14 L66 40 L40 66 L14 40 Z' fill='none' stroke='%23C9A84C' stroke-width='0.5'/%3E%3Ccircle cx='40' cy='40' r='6' fill='none' stroke='%23C9A84C' stroke-width='0.5'/%3E%3Cpath d='M40 0 L40 14 M40 66 L40 80 M0 40 L14 40 M66 40 L80 40' stroke='%23C9A84C' stroke-width='0.5'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px; opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 112px);
+    font-weight: 900; line-height: 0.92;
+    color: var(--ivory);
+    max-width: 800px;
+    opacity: 0; animation: fadeUp 1s 0.6s forwards;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    margin-top: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-style: italic;
+    color: var(--sand); max-width: 500px; line-height: 1.7;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+  }
+  .hero-cta {
+    margin-top: 44px; display: flex; gap: 20px; align-items: center;
+    opacity: 0; animation: fadeUp 1s 1.2s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--deep);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 16px 40px; text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .btn-primary:hover { background: var(--copper); color: var(--ivory); transform: translateY(-2px); }
+  .btn-ghost {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 2px;
+    color: var(--ivory); text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 3px;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute; right: 60px; bottom: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 1s 1.5s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollPulse 2s infinite;
+  }
+  .scroll-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--sand);
+    writing-mode: vertical-rl;
+  }
+
+  /* === INTRO === */
+  .intro {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 90vh; overflow: hidden;
+  }
+  .intro-image {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--terra), var(--deep));
+  }
+  .intro-image-inner {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.3) 0%, transparent 60%),
+      repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(201,168,76,0.03) 30px, rgba(201,168,76,0.03) 60px);
+  }
+  .intro-motif {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 280px; height: 280px; opacity: 0.12;
+  }
+  .intro-text {
+    padding: 100px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--cream);
+  }
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--copper);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--copper);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700; line-height: 1.1;
+    color: var(--deep); margin-bottom: 32px;
+  }
+  .section-title em { font-style: italic; color: var(--khmer-red); }
+  .body-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; line-height: 1.9;
+    color: #4A3728; margin-bottom: 20px;
+  }
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 36px 0;
+  }
+  .stat-row {
+    display: flex; gap: 48px; margin-top: 8px;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; font-weight: 900;
+    color: var(--terra); line-height: 1;
+    display: block;
+  }
+  .stat-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; color: #888;
+    margin-top: 6px;
+  }
+
+  /* === CULTURES === */
+  .cultures {
+    padding: 120px 60px;
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .cultures::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M60 10 L110 60 L60 110 L10 60 Z' fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.15'/%3E%3C/svg%3E") repeat;
+    opacity: 0.4;
+  }
+  .cultures-header {
+    text-align: center; margin-bottom: 80px; position: relative;
+  }
+  .cultures-header .section-label { justify-content: center; }
+  .cultures-header .section-label::before { display: none; }
+  .cultures-header .section-title {
+    color: var(--ivory); font-size: clamp(40px, 5vw, 72px);
+  }
+  .cultures-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; position: relative;
+  }
+  .culture-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 2/3;
+    background: linear-gradient(180deg, transparent 30%, rgba(26,18,8,0.95) 100%);
+  }
+  .culture-card-bg {
+    position: absolute; inset: 0;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .culture-card:hover .culture-card-bg { transform: scale(1.08); }
+  .culture-card:nth-child(1) .culture-card-bg {
+    background: linear-gradient(155deg, #8B1A10 0%, #4A0E08 40%, #1A0A05 100%);
+  }
+  .culture-card:nth-child(2) .culture-card-bg {
+    background: linear-gradient(155deg, #2C5F3D 0%, #1A3D28 40%, #0D1F14 100%);
+  }
+  .culture-card:nth-child(3) .culture-card-bg {
+    background: linear-gradient(155deg, #5C4A1A 0%, #3D3010 40%, #1A1408 100%);
+  }
+  .culture-motif {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    opacity: 0.12; transition: opacity 0.4s;
+    width: 60%; height: 60%;
+  }
+  .culture-card:hover .culture-motif { opacity: 0.22; }
+  .culture-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 40px 36px;
+    transform: translateY(24px);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .culture-card:hover .culture-content { transform: translateY(0); }
+  .culture-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .culture-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--ivory); line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .culture-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.7;
+    color: var(--sand);
+    opacity: 0;
+    transition: opacity 0.5s 0.1s;
+    max-height: 0; overflow: hidden;
+    transition: opacity 0.4s, max-height 0.4s;
+  }
+  .culture-card:hover .culture-desc {
+    opacity: 1; max-height: 200px;
+  }
+  .culture-icon {
+    font-size: 60px; position: absolute;
+    top: 36px; right: 36px; opacity: 0.7;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .culture-card:hover .culture-icon { opacity: 1; transform: scale(1.1) rotate(-5deg); }
+
+  /* === EXPERIENCES === */
+  .experiences {
+    padding: 120px 60px;
+    background: var(--ivory);
+  }
+  .exp-header { margin-bottom: 70px; }
+  .exp-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+  .exp-card {
+    position: relative; overflow: hidden;
+    background: var(--cream);
+    padding: 56px 52px;
+    border-top: 2px solid transparent;
+    transition: border-color 0.3s, background 0.4s;
+  }
+  .exp-card:hover { border-color: var(--gold); background: white; }
+  .exp-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px; font-weight: 900;
+    color: var(--sand); opacity: 0.5;
+    line-height: 1; margin-bottom: -20px;
+    transition: color 0.3s, opacity 0.3s;
+  }
+  .exp-card:hover .exp-number { color: var(--gold); opacity: 0.7; }
+  .exp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--deep); margin-bottom: 16px;
+    transition: color 0.3s;
+  }
+  .exp-card:hover .exp-title { color: var(--terra); }
+  .exp-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; line-height: 1.85;
+    color: #5A4838;
+  }
+  .exp-arrow {
+    position: absolute; bottom: 40px; right: 40px;
+    width: 44px; height: 44px;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    font-size: 18px; color: var(--copper);
+  }
+  .exp-card:hover .exp-arrow {
+    background: var(--gold); border-color: var(--gold);
+    color: var(--deep); transform: rotate(45deg);
+  }
+  .exp-icon {
+    font-size: 36px; margin-bottom: 24px;
+    display: block;
+  }
+
+  /* === DESTINATIONS === */
+  .destinations {
+    padding: 120px 0;
+    background: var(--deep);
+    position: relative;
+  }
+  .destinations-header {
+    padding: 0 60px; margin-bottom: 60px;
+  }
+  .destinations-header .section-title { color: var(--ivory); }
+  .dest-scroll {
+    display: flex; gap: 3px;
+    overflow-x: auto; padding: 0 60px;
+    scrollbar-width: none;
+  }
+  .dest-scroll::-webkit-scrollbar { display: none; }
+  .dest-card {
+    flex: 0 0 380px; height: 520px;
+    position: relative; overflow: hidden;
+  }
+  .dest-bg {
+    position: absolute; inset: 0;
+    transition: transform 0.6s ease;
+  }
+  .dest-card:hover .dest-bg { transform: scale(1.06); }
+  .dest-card:nth-child(1) .dest-bg {
+    background: linear-gradient(160deg, #6B3A2A 0%, #2C1810 60%, #1A0E08 100%);
+  }
+  .dest-card:nth-child(2) .dest-bg {
+    background: linear-gradient(160deg, #1A4A3A 0%, #0D2820 60%, #081510 100%);
+  }
+  .dest-card:nth-child(3) .dest-bg {
+    background: linear-gradient(160deg, #4A3A1A 0%, #2C220D 60%, #1A1408 100%);
+  }
+  .dest-card:nth-child(4) .dest-bg {
+    background: linear-gradient(160deg, #3A1A4A 0%, #201028 60%, #100814 100%);
+  }
+  .dest-card:nth-child(5) .dest-bg {
+    background: linear-gradient(160deg, #1A2A4A 0%, #0D1828 60%, #080E14 100%);
+  }
+  .dest-art {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 100px; opacity: 0.15;
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .dest-card:hover .dest-art { opacity: 0.25; transform: scale(1.1); }
+  .dest-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,18,8,0.9) 0%, transparent 60%);
+  }
+  .dest-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 36px 32px;
+  }
+  .dest-cat {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--ivory); margin-bottom: 10px; line-height: 1.2;
+  }
+  .dest-detail {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: var(--sand); line-height: 1.6;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+  }
+  .dest-card:hover .dest-detail { max-height: 100px; opacity: 1; }
+
+  /* === FOOD === */
+  .food {
+    padding: 120px 60px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .food::after {
+    content: 'ẨM THỰC';
+    position: absolute; right: -60px; top: 50%;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px; font-weight: 900;
+    color: var(--sand); opacity: 0.08;
+    transform: translateY(-50%) rotate(90deg);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .food-layout {
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 80px; align-items: center;
+  }
+  .food-list { margin-top: 40px; }
+  .food-item {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(139,69,19,0.15);
+    display: flex; gap: 24px; align-items: flex-start;
+    transition: padding-left 0.3s;
+  }
+  .food-item:hover { padding-left: 12px; }
+  .food-emoji { font-size: 32px; flex-shrink: 0; margin-top: 4px; }
+  .food-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--terra); margin-bottom: 6px;
+  }
+  .food-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.7;
+    color: #6A5040;
+  }
+  .food-visual {
+    position: relative;
+    background: linear-gradient(135deg, var(--terra), var(--khmer-red), #6B3A12);
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .food-visual-inner {
+    text-align: center; padding: 60px;
+  }
+  .food-big-emoji { font-size: 120px; display: block; margin-bottom: 24px; }
+  .food-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic;
+    color: rgba(255,255,255,0.9); line-height: 1.6;
+  }
+  .food-quote-src {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    margin-top: 20px;
+  }
+
+  /* === FESTIVAL === */
+  .festival {
+    padding: 120px 60px;
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .festival-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 80%, rgba(181,69,27,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.15) 0%, transparent 50%);
+  }
+  .festival-header { text-align: center; margin-bottom: 80px; position: relative; }
+  .festival-header .section-label { justify-content: center; }
+  .festival-header .section-label::before { display: none; }
+  .festival-header .section-title { color: var(--ivory); }
+  .festival-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; position: relative;
+  }
+  .fest-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 40px 32px;
+    transition: background 0.4s, border-color 0.4s, transform 0.3s;
+  }
+  .fest-card:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-6px);
+  }
+  .fest-month {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 900;
+    color: var(--gold); opacity: 0.5;
+    line-height: 1; margin-bottom: 16px;
+  }
+  .fest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--ivory); margin-bottom: 12px;
+  }
+  .fest-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; line-height: 1.7;
+    color: var(--sand);
+  }
+  .fest-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+
+  /* === QUOTE BANNER === */
+  .quote-banner {
+    padding: 100px 60px;
+    background: var(--terra);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .quote-banner::before {
+    content: '❝';
+    position: absolute; top: -40px; left: 60px;
+    font-size: 300px; color: rgba(255,255,255,0.05);
+    font-family: serif;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-style: italic; font-weight: 400;
+    color: var(--ivory); line-height: 1.4;
+    max-width: 900px; margin: 0 auto 28px;
+    position: relative;
+  }
+  .quote-author {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  /* === TIPS === */
+  .tips {
+    padding: 120px 60px;
+    background: var(--ivory);
+  }
+  .tips-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; margin-top: 60px;
+  }
+  .tip-card {
+    padding: 48px 40px;
+    background: white;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+  .tip-card:hover {
+    border-left-color: var(--gold);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  }
+  .tip-icon { font-size: 40px; margin-bottom: 24px; display: block; }
+  .tip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--deep); margin-bottom: 16px;
+  }
+  .tip-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; line-height: 1.8; color: #5A4838;
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 80px 60px 40px;
+    background: var(--deep);
+    position: relative; overflow: hidden;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 80px; margin-bottom: 60px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900;
+    color: var(--gold); margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic;
+    color: var(--sand); line-height: 1.7; margin-bottom: 28px;
+  }
+  .footer-h {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 14px; }
+  .footer-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: var(--sand);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: rgba(212,184,150,0.5);
+  }
+  .footer-langs {
+    display: flex; gap: 20px;
+  }
+  .footer-langs a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(212,184,150,0.5);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-langs a:hover { color: var(--gold); }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.7); opacity: 0.5; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Large decorative text */
+  .deco-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 15vw, 200px);
+    font-weight: 900; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,168,76,0.12);
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+  }
+
+  /* Floating decorative elements */
+  .float-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    nav { padding: 20px 30px; }
+    .nav-links { gap: 24px; }
+    .hero { padding: 0 30px 60px; }
+    .hero-scroll { right: 30px; }
+    .intro { grid-template-columns: 1fr; }
+    .intro-image { height: 400px; }
+    .intro-text { padding: 60px 40px; }
+    .cultures { padding: 80px 30px; }
+    .cultures-grid { grid-template-columns: 1fr; gap: 3px; }
+    .culture-card { aspect-ratio: 3/2; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .food-layout { grid-template-columns: 1fr; }
+    .festival-grid { grid-template-columns: repeat(2, 1fr); }
+    .tips-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .experiences, .food, .festival, .tips, .destinations { padding: 80px 30px; }
+    .destinations-header, .dest-scroll { padding: 0 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">TRÀ VINH</a>
+  <ul class="nav-links">
+    <li><a href="#cultures">Văn Hoá</a></li>
+    <li><a href="#experiences">Trải Nghiệm</a></li>
+    <li><a href="#destinations">Điểm Đến</a></li>
+    <li><a href="#food">Ẩm Thực</a></li>
+    <li><a href="#festival">Lễ Hội</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <p class="hero-eyebrow">Đồng Bằng Sông Cửu Long · Việt Nam</p>
+  <h1 class="hero-title">
+    Vùng Đất<br>
+    <em>Giao Thoa</em><br>
+    Văn Hoá
+  </h1>
+  <p class="hero-sub">
+    Nơi ba nền văn hoá Kinh – Khmer – Hoa hoà quyện, tạo nên bản sắc độc đáo không nơi nào có được.
+  </p>
+  <div class="hero-cta">
+    <a href="#experiences" class="btn-primary">Khám Phá Ngay</a>
+    <a href="#cultures" class="btn-ghost">Tìm Hiểu Thêm →</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Cuộn xuống</span>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" id="about">
+  <div class="intro-image">
+    <div class="intro-image-inner"></div>
+    <svg class="intro-motif" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M200 20 L380 200 L200 380 L20 200 Z" stroke="#C9A84C" stroke-width="2"/>
+      <path d="M200 60 L340 200 L200 340 L60 200 Z" stroke="#C9A84C" stroke-width="1.5"/>
+      <path d="M200 100 L300 200 L200 300 L100 200 Z" stroke="#C9A84C" stroke-width="1"/>
+      <circle cx="200" cy="200" r="60" stroke="#C9A84C" stroke-width="1"/>
+      <circle cx="200" cy="200" r="30" stroke="#C9A84C" stroke-width="0.5"/>
+      <path d="M200 20 L200 380 M20 200 L380 200" stroke="#C9A84C" stroke-width="0.5" opacity="0.5"/>
+      <path d="M74 74 L326 326 M74 326 L326 74" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    </svg>
+
+    <!-- Floating dots -->
+    <div style="position:absolute;top:15%;left:20%;width:8px;height:8px;background:#C9A84C;border-radius:50%;opacity:0.6;animation:scrollPulse 3s infinite"></div>
+    <div style="position:absolute;top:35%;right:25%;width:5px;height:5px;background:#B5451B;border-radius:50%;opacity:0.5;animation:scrollPulse 2.5s 0.5s infinite"></div>
+    <div style="position:absolute;bottom:30%;left:35%;width:12px;height:12px;background:#C9A84C;border-radius:50%;opacity:0.3;animation:scrollPulse 4s 1s infinite"></div>
+
+    <div style="position:absolute;bottom:40px;left:40px;right:40px">
+      <div style="background:rgba(26,18,8,0.7);backdrop-filter:blur(12px);padding:28px 32px;border-left:3px solid #C9A84C">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:10px">Vị trí</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;color:#F5F0E8;line-height:1.5">Tỉnh Trà Vinh<br><span style="font-size:13px;font-family:'Cormorant Garamond',serif;color:#D4B896;letter-spacing:1px">Đồng Bằng Sông Cửu Long, Việt Nam</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="intro-text reveal">
+    <div class="section-label">Về Trà Vinh</div>
+    <h2 class="section-title">Nơi Ba Dòng Chảy<br>Văn Hoá <em>Hội Tụ</em></h2>
+    <p class="body-text">
+      Trà Vinh là vùng đất hiếm có ở Đồng Bằng Sông Cửu Long, nơi ba cộng đồng dân tộc Kinh, Khmer và Hoa đã chung sống hòa thuận qua nhiều thế kỷ, tạo nên một bức tranh văn hóa đa sắc màu kỳ diệu.
+    </p>
+    <p class="body-text">
+      Từ những ngôi chùa Khmer trên 400 năm tuổi, những hội quán người Hoa ngàn năm lịch sử, đến những ngôi đình làng người Việt cổ kính – Trà Vinh là cuốn sách sống về sự dung hợp văn hoá đặc sắc nhất miền Nam.
+    </p>
+    <div class="divider"></div>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">140+</span>
+        <span class="stat-desc">Chùa Khmer</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">30%</span>
+        <span class="stat-desc">Dân tộc Khmer</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2000+</span>
+        <span class="stat-desc">Năm lịch sử</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURES -->
+<section class="cultures" id="cultures">
+  <div class="cultures-header reveal">
+    <div class="section-label">Ba Nền Văn Hoá</div>
+    <h2 class="section-title">Giao Thoa & <em>Hoà Quyện</em></h2>
+  </div>
+  <div class="cultures-grid">
+
+    <div class="culture-card">
+      <div class="culture-card-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(181,69,27,0.4),transparent 70%)"></div>
+      </div>
+      <svg class="culture-motif" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 10 L190 100 L100 190 L10 100 Z" stroke="#C9A84C" stroke-width="2"/>
+        <path d="M100 30 L170 100 L100 170 L30 100 Z" stroke="#C9A84C" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="40" stroke="#C9A84C" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="20" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M100 10 L100 190 M10 100 L190 100" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <span class="culture-icon">🏛️</span>
+      <div class="culture-content">
+        <div class="culture-tag">Khmer · Phật Giáo Nam Tông</div>
+        <h3 class="culture-name">Văn Hoá<br>Khmer</h3>
+        <p class="culture-desc">Người Khmer chiếm gần 1/3 dân số Trà Vinh, mang theo kiến trúc chùa tháp lộng lẫy, lễ hội Ok Om Bok, trang phục sarong rực rỡ và ẩm thực bún nước lèo độc đáo.</p>
+      </div>
+    </div>
+
+    <div class="culture-card">
+      <div class="culture-card-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(44,95,61,0.4),transparent 70%)"></div>
+      </div>
+      <svg class="culture-motif" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="160" height="160" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="50" y="50" width="100" height="100" stroke="#C9A84C" stroke-width="1.5"/>
+        <rect x="80" y="80" width="40" height="40" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M20 20 L180 180 M180 20 L20 180" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
+      </svg>
+      <span class="culture-icon">🐉</span>
+      <div class="culture-content">
+        <div class="culture-tag">Hoa · Phật Giáo Đại Thừa</div>
+        <h3 class="culture-name">Văn Hoá<br>Người Hoa</h3>
+        <p class="culture-desc">Cộng đồng người Hoa để lại dấu ấn qua những hội quán cổ kính, nghề truyền thống, ẩm thực phong phú và những phong tục Tết truyền thống đặc sắc vẫn còn lưu giữ đến ngày nay.</p>
+      </div>
+    </div>
+
+    <div class="culture-card">
+      <div class="culture-card-bg">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%, rgba(92,74,26,0.4),transparent 70%)"></div>
+      </div>
+      <svg class="culture-motif" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="80" stroke="#C9A84C" stroke-width="2"/>
+        <circle cx="100" cy="100" r="55" stroke="#C9A84C" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="30" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M100 20 L100 180 M20 100 L180 100 M38 38 L162 162 M162 38 L38 162" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <span class="culture-icon">🎎</span>
+      <div class="culture-content">
+        <div class="culture-tag">Kinh · Truyền Thống Việt</div>
+        <h3 class="culture-name">Văn Hoá<br>Người Kinh</h3>
+        <p class="culture-desc">Người Kinh mang tới những đình làng uy nghi, lễ hội dân gian, nghề đan lát truyền thống và ẩm thực đậm chất miền Tây sông nước như bánh tét, bánh dừa đặc sắc.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="experiences">
+  <div class="exp-header reveal">
+    <div class="section-label">Điều Chờ Bạn</div>
+    <h2 class="section-title">Những Trải Nghiệm<br><em>Không Thể Quên</em></h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-number">01</div>
+      <span class="exp-icon">🛕</span>
+      <h3 class="exp-title">Hành Trình Chùa Khmer</h3>
+      <p class="exp-body">Dạo bước qua hơn 140 ngôi chùa Khmer độc đáo — từ Âng cổ kính ngàn năm tuổi, chùa Hang huyền bí đến chùa Nodol uy nghi — để cảm nhận triết lý Phật giáo Nam Tông đặc sắc.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-number">02</div>
+      <span class="exp-icon">🚣</span>
+      <h3 class="exp-title">Chèo Xuồng Giữa Rừng Dừa</h3>
+      <p class="exp-body">Xuôi dòng kênh rạch chằng chịt giữa những vườn dừa nước xanh mướt, ghé thăm làng nghề truyền thống, hít thở không khí trong lành của vùng sông nước thanh bình.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-number">03</div>
+      <span class="exp-icon">🎊</span>
+      <h3 class="exp-title">Sống Trong Lễ Hội Ok Om Bok</h3>
+      <p class="exp-body">Hoà mình vào lễ hội lớn nhất của người Khmer Nam Bộ — thả đèn nước lung linh, xem đua ghe ngo rực rỡ và thưởng thức bánh cốm dẹp trong đêm rằm tháng 10 âm lịch.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-number">04</div>
+      <span class="exp-icon">🦜</span>
+      <h3 class="exp-title">Vườn Chim Trà Cú & Sinh Thái</h3>
+      <p class="exp-body">Khám phá thiên đường chim nước với hàng nghìn cá thể cò, vạc, điên điển... giữa rừng tràm nguyên sinh. Trải nghiệm du lịch sinh thái bền vững đặc sắc miền Tây.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-number">05</div>
+      <span class="exp-icon">🍜</span>
+      <h3 class="exp-title">Học Nấu Ẩm Thực Ba Dân Tộc</h3>
+      <p class="exp-body">Cùng các bà mẹ địa phương học nấu bún nước lèo Khmer, bánh tằm bì, cháo cá thác lác... những công thức gia truyền được truyền qua bao thế hệ tại bếp lửa làng.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-number">06</div>
+      <span class="exp-icon">🌅</span>
+      <h3 class="exp-title">Biển Ba Động & Bình Minh</h3>
+      <p class="exp-body">Đón bình minh trên bãi biển Ba Động hoang sơ, ngắm ngư dân kéo lưới trong ánh hồng, tắm mình trong vẻ đẹp nguyên sơ của vùng biển chưa bị khai thác du lịch ồ ạt.</p>
+      <div class="exp-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="destinations-header reveal">
+    <div class="section-label" style="color:var(--gold)"><span style="background:var(--gold);width:40px;height:1px;display:inline-block;margin-right:16px"></span>Điểm Đến Nổi Bật</div>
+    <h2 class="section-title">Những Nơi<br><em style="color:var(--gold);font-style:italic">Phải Đặt Chân</em></h2>
+  </div>
+  <div class="dest-scroll">
+    <div class="dest-card">
+      <div class="dest-bg"></div>
+      <div class="dest-art">🛕</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-content">
+        <div class="dest-cat">Di Tích Lịch Sử</div>
+        <div class="dest-name">Chùa Âng<br>(Angkor Reach)</div>
+        <div class="dest-detail">Ngôi chùa Khmer trên 400 năm tuổi, kiến trúc độc đáo với những bức phù điêu tinh xảo kể về thần thoại Hindu – Phật giáo.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg"></div>
+      <div class="dest-art">🦩</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-content">
+        <div class="dest-cat">Sinh Thái</div>
+        <div class="dest-name">Vườn Chim<br>Trà Cú</div>
+        <div class="dest-detail">Khu bảo tồn chim nước với hàng chục nghìn cá thể, là điểm đến yêu thích của các nhiếp ảnh gia thiên nhiên.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg"></div>
+      <div class="dest-art">🌊</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-content">
+        <div class="dest-cat">Biển Đảo</div>
+        <div class="dest-name">Biển Ba Động</div>
+        <div class="dest-detail">Bãi biển hoang sơ dài 7km, sóng êm, cát trắng mịn – viên ngọc ẩn chưa bị khai phá của Trà Vinh.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg"></div>
+      <div class="dest-art">🏮</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-content">
+        <div class="dest-cat">Di Sản Văn Hoá</div>
+        <div class="dest-name">Hội Quán<br>Người Hoa</div>
+        <div class="dest-detail">Những công trình kiến trúc đặc sắc từ thế kỷ 18, nơi gìn giữ văn hóa và tín ngưỡng của cộng đồng người Hoa.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-bg"></div>
+      <div class="dest-art">🌴</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-content">
+        <div class="dest-cat">Làng Nghề</div>
+        <div class="dest-name">Làng Dừa<br>Tiểu Cần</div>
+        <div class="dest-detail">Vườn dừa bạt ngàn với những nghề thủ công truyền thống độc đáo như đan chiếu, làm kẹo dừa, dệt thảm.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="food" id="food">
+  <div class="food-layout">
+    <div class="reveal">
+      <div class="section-label">Ẩm Thực Đặc Sản</div>
+      <h2 class="section-title">Vị Ngon Hội<br>Tụ <em>Ba Miền</em></h2>
+      <p class="body-text">Ẩm thực Trà Vinh là sự kết hợp tuyệt vời của ba nền văn hoá ẩm thực, tạo nên những hương vị không thể tìm thấy ở bất kỳ nơi nào khác trên đất Việt.</p>
+      <div class="food-list">
+        <div class="food-item">
+          <span class="food-emoji">🍜</span>
+          <div>
+            <div class="food-name">Bún Nước Lèo</div>
+            <div class="food-desc">Món ăn đặc trưng Khmer với nước lèo thơm lừng từ mắm bò hóc, sả, nghệ và nước cốt dừa, ăn kèm rau sống địa phương.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <span class="food-emoji">🥞</span>
+          <div>
+            <div class="food-name">Bánh Tằm Bì</div>
+            <div class="food-desc">Bánh tằm mềm dẻo ăn kèm bì heo thái sợi, nước cốt dừa béo ngậy và nước mắm chua ngọt pha chế bí truyền.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <span class="food-emoji">🥣</span>
+          <div>
+            <div class="food-name">Cháo Cá Thác Lác</div>
+            <div class="food-desc">Cháo trắng mịn với cá thác lác tươi ngon, gừng thơm và tiêu đen – vừa bổ dưỡng vừa đậm đà bản sắc miền Tây.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <span class="food-emoji">🍡</span>
+          <div>
+            <div class="food-name">Bánh Cốm Dẹp</div>
+            <div class="food-desc">Đặc sản mùa lễ hội Ok Om Bok, làm từ nếp non dẹp giã bằng tay, kèm nước cốt dừa và đường thốt nốt ngọt thanh.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="food-visual reveal">
+      <div class="food-visual-inner">
+        <span class="food-big-emoji">🍲</span>
+        <p class="food-quote">"Ăn một lần, nhớ cả đời — ẩm thực Trà Vinh là bản hoà âm của ba nền văn hoá"</p>
+        <div class="food-quote-src">— Văn hóa ẩm thực Trà Vinh</div>
+      </div>
+      <div style="position:absolute;top:20px;right:20px;opacity:0.1">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 5 L115 60 L60 115 L5 60 Z" stroke="white" stroke-width="2"/>
+          <path d="M60 20 L100 60 L60 100 L20 60 Z" stroke="white" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="25" stroke="white" stroke-width="1"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FESTIVALS -->
+<section class="festival" id="festival">
+  <div class="festival-bg"></div>
+  <div class="festival-header reveal">
+    <div class="section-label" style="color:var(--gold)">Lịch Lễ Hội</div>
+    <h2 class="section-title">Năm Tháng <em style="color:var(--gold)">Rộn Ràng</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--sand);max-width:600px;margin:20px auto 0;line-height:1.7">Mỗi tháng, mỗi mùa đều có lễ hội đặc sắc của một trong ba cộng đồng văn hoá tại Trà Vinh</p>
+  </div>
+  <div class="festival-grid">
+    <div class="fest-card reveal">
+      <span class="fest-icon">🌺</span>
+      <div class="fest-month">T1–2</div>
+      <div class="fest-name">Tết Nguyên Đán & Tết Hoa</div>
+      <div class="fest-desc">Ba cộng đồng cùng đón Tết theo bản sắc riêng — pháo hoa, múa lân, và những nghi thức đón năm mới đặc sắc.</div>
+    </div>
+    <div class="fest-card reveal">
+      <span class="fest-icon">🎋</span>
+      <div class="fest-month">T4</div>
+      <div class="fest-name">Tết Chol Chnam Thmay</div>
+      <div class="fest-desc">Tết cổ truyền Khmer đón năm mới theo lịch Phật giáo, với nghi lễ tắm Phật, dâng cơm và vui chơi trò chơi dân gian.</div>
+    </div>
+    <div class="fest-card reveal">
+      <span class="fest-icon">🏮</span>
+      <div class="fest-month">T7</div>
+      <div class="fest-name">Lễ Vu Lan Báo Hiếu</div>
+      <div class="fest-desc">Lễ hội tháng 7 âm lịch linh thiêng của người Hoa và người Kinh, với hoa đèn lung linh và nghi thức cúng tổ tiên.</div>
+    </div>
+    <div class="fest-card reveal">
+      <span class="fest-icon">🚣</span>
+      <div class="fest-month">T10</div>
+      <div class="fest-name">Lễ Hội Ok Om Bok</div>
+      <div class="fest-desc">Lễ hội lớn nhất năm của người Khmer — thả đèn nước, đua ghe ngo rực rỡ và cúng trăng truyền thống thiêng liêng.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BANNER -->
+<section class="quote-banner">
+  <blockquote class="quote-text reveal">
+    "Đến Trà Vinh một lần, bạn sẽ hiểu rằng sự khác biệt không phải là rào cản — mà là nguồn gốc của vẻ đẹp"
+  </blockquote>
+  <div class="quote-author reveal">— Trà Vinh, Vùng Đất Giao Thoa Văn Hoá</div>
+</section>
+
+<!-- TRAVEL TIPS -->
+<section class="tips" id="tips">
+  <div class="reveal">
+    <div class="section-label">Cẩm Nang Du Lịch</div>
+    <h2 class="section-title">Bí Kíp Để<br><em>Chuyến Đi Hoàn Hảo</em></h2>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card reveal">
+      <span class="tip-icon">🗓️</span>
+      <h3 class="tip-title">Thời Điểm Lý Tưởng</h3>
+      <p class="tip-body">Tháng 11 đến tháng 4 là mùa khô, thời tiết mát mẻ dễ chịu nhất để tham quan. Tháng 10 âm lịch trùng lễ Ok Om Bok là thời điểm đặc biệt nhất trong năm.</p>
+    </div>
+    <div class="tip-card reveal">
+      <span class="tip-icon">🚌</span>
+      <h3 class="tip-title">Di Chuyển</h3>
+      <p class="tip-body">Từ TP.HCM đi xe khách khoảng 3–4 giờ. Tại Trà Vinh, thuê xe máy hoặc xe đạp là cách tốt nhất để khám phá làng quê và những ngôi chùa ẩn mình trong vườn dừa.</p>
+    </div>
+    <div class="tip-card reveal">
+      <span class="tip-icon">🙏</span>
+      <h3 class="tip-title">Văn Hoá & Tôn Trọng</h3>
+      <p class="tip-body">Khi vào chùa Khmer, mặc trang phục kín đáo và tháo giày. Hỏi phép trước khi chụp ảnh người dân địa phương. Học vài câu chào hỏi bằng tiếng Khmer sẽ tạo nên sự khác biệt.</p>
+    </div>
+    <div class="tip-card reveal">
+      <span class="tip-icon">🛏️</span>
+      <h3 class="tip-title">Lưu Trú</h3>
+      <p class="tip-body">Chọn homestay tại làng người Khmer để có trải nghiệm văn hoá sâu sắc nhất. Ăn sáng tại chợ địa phương để thưởng thức ẩm thực đường phố chân thực và giá cả phải chăng.</p>
+    </div>
+    <div class="tip-card reveal">
+      <span class="tip-icon">📸</span>
+      <h3 class="tip-title">Nhiếp Ảnh</h3>
+      <p class="tip-body">Giờ vàng tại chùa Âng là lúc 6–8h sáng khi ánh nắng chiếu qua hàng cây cổ thụ. Vườn chim đẹp nhất lúc bình minh khi cò trắng bay về tổ tạo nên khung cảnh huyền ảo.</p>
+    </div>
+    <div class="tip-card reveal">
+      <span class="tip-icon">💰</span>
+      <h3 class="tip-title">Ngân Sách</h3>
+      <p class="tip-body">Trà Vinh là điểm đến kinh tế với chi phí sinh hoạt thấp. Bữa ăn ngon tại hàng quán địa phương chỉ từ 30.000–80.000 VNĐ. Phương tiện di chuyển và lưu trú rất hợp túi tiền.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">TRÀ VINH</div>
+      <p class="footer-tagline">Vùng đất giao thoa văn hoá độc đáo nhất Đồng Bằng Sông Cửu Long — nơi ba nền văn minh hoà quyện thành một bản sắc riêng biệt và đẹp đẽ.</p>
+      <div style="display:flex;gap:16px;margin-top:24px">
+        <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='transparent'">📘</div>
+        <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='transparent'">📸</div>
+        <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.3s" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='transparent'">▶️</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Khám Phá</div>
+      <ul class="footer-links">
+        <li><a href="#">Văn hoá Khmer</a></li>
+        <li><a href="#">Di sản người Hoa</a></li>
+        <li><a href="#">Làng nghề truyền thống</a></li>
+        <li><a href="#">Sinh thái & Thiên nhiên</a></li>
+        <li><a href="#">Ẩm thực địa phương</a></li>
+        <li><a href="#">Biển Ba Động</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-h">Thông Tin</div>
+      <ul class="footer-links">
+        <li><a href="#">Lịch lễ hội 2025</a></li>
+        <li><a href="#">Cẩm nang du lịch</a></li>
+        <li><a href="#">Bản đồ điểm đến</a></li>
+        <li><a href="#">Đặt tour trải nghiệm</a></li>
+        <li><a href="#">Liên hệ & Hỗ trợ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Trà Vinh Tourism · Sở Du lịch Trà Vinh</div>
+    <div class="footer-langs">
+      <a href="#">Tiếng Việt</a>
+      <a href="#">English</a>
+      <a href="#">中文</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .culture-card, .exp-card, .dest-card, .fest-card, .tip-card, .food-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform += ' scale(1.8)';
+      ring.style.width = '54px'; ring.style.height = '54px';
+      ring.style.borderColor = 'var(--gold)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'var(--copper)';
+    });
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Parallax hero
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    document.querySelector('.hero-bg').style.transform = `translateY(${y * 0.4}px)`;
+    document.querySelector('.hero-pattern').style.transform = `translateY(${y * 0.2}px)`;
+  });
+
+  // Smooth nav scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
